@@ -1,5 +1,6 @@
 package bms.com.BookMyShow.controllers;
 
+import bms.com.BookMyShow.dtos.ResponseStatus;
 import bms.com.BookMyShow.dtos.SignUpRequestDto;
 import bms.com.BookMyShow.dtos.SignUpResponseDto;
 import bms.com.BookMyShow.models.User;
@@ -15,11 +16,13 @@ public class UserController {
         SignUpResponseDto signUpResponseDto = new SignUpResponseDto();
           try{
               User user = userServices.signUp(signUpRequestDto.getEmail(), signUpRequestDto.getPassword());
+              signUpResponseDto.setResponseStatus(ResponseStatus.SUCCESS);
+              signUpResponseDto.setUserId(user.getId());
           }
           catch (Exception e){
-
+               signUpResponseDto.setResponseStatus(ResponseStatus.FAILURE);
           }
-          return null;
+          return signUpResponseDto;
     }
 
 }
