@@ -17,6 +17,7 @@ public class Payment extends Base{
     private PaymentProvider paymentProvider;
     //Ordinal means we will use id like 0,1,2.. for enums
     @Enumerated(EnumType.ORDINAL)
+    //ordinal means numerical value
     private PaymentStatus paymentStatus;
 
     @ManyToOne

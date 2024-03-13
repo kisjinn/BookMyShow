@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableJpaAuditing   //whenever any changes happen on db, listen to that event
 public class BookMyShowApplication implements CommandLineRunner {
 	@Autowired
-     private UserController userController;
+	private UserController userController;
 	public static void main(String[] args) {
 
 		SpringApplication.run(BookMyShowApplication.class, args);

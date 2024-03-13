@@ -11,6 +11,7 @@ import java.util.List;
 @Setter
 @Getter
 @Entity (name = "bookings")
+//Ticket class
 public class Booking extends Base{
     //Ticket
     private BookingStatus bookingStatus;
@@ -27,4 +28,9 @@ public class Booking extends Base{
     1         ---->      M
   Booking ------------ ShowSeat
     1        <------     1
+
+
+        1    ---->      1
+  Booking ------------User
+         M <------     1
  */
