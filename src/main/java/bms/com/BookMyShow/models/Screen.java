@@ -9,8 +9,9 @@ import java.util.List;
 @Getter
 @Entity (name = "screens")
 public class Screen extends Base{
-  private Screen name;
+  private String name;
   @OneToMany (mappedBy = "screen")
+  //screen is as same as the attribute "screen" of Seat class
   private List<Seat> seats;
   @Enumerated(EnumType.ORDINAL)
   @ElementCollection    //as we haved list of features so collection

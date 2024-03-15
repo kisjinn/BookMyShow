@@ -18,10 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+
 @Setter
 @Getter
-//annotation to tell SB to create obj of curr class automatically which help us in resolving dependency
+@Service
+//service/component annotation to tell SB to create object of curr class automatically at compile time which help us in resolving dependency
 //Component and service both annotations used for the same purpose
 public class BookingService {
 
@@ -44,6 +45,7 @@ public class BookingService {
     public Booking bookTicket(Long userID, Long showId, List<Long> showSeatId) throws ShowSeatNotAvailableException {
         /*
 ------DISCLAIMER: as having lock in between in SB is a advance Concept so for BMS design purpose, we will take a lock on complete method => Transactional annotation-----------------------------------
+             ------------Take a LOCK-------------------
         1. Get the user with given userId
         2. Get show with given shwoId
         3. Get list of showSeats with the given showSeatId
@@ -56,7 +58,7 @@ public class BookingService {
         *****************Release a LOCK***********************
         8. Create the booking object
         9. Booking service will return booking object (Payment thing we will do in project module)
-
+                           ----------RELEASE a LOCK-------------------
         */
         //Getting all values from DB using repository interfaces of respective models
         Optional<User> optionalUser = userRepository.findById(userID);
@@ -73,6 +75,7 @@ public class BookingService {
             throw new UnsupportedOperationException("Show not found");
         }
         Show show= optionalShow.get();
+
         List<ShowSeat> showSeats = showSeatRepository.findAllById(showSeatId);
 
         //4. Check if all showseats are available or not
@@ -92,7 +95,7 @@ public class BookingService {
         Booking booking= new Booking();
         booking.setUser(user);
         booking.setShowSeat(savedShowSeats);
-        booking.setBookingStatus(BookingStatus.PENDING);
+        booking.setBookingStatus(BookingStatus.PENDING); //this will send to payment gateway, payment will done and then this bookingstatus will change to Confirmed
         booking.setAmount(priceCalculatorService.calculatePrice(showSeats, show));
         Booking savedBooking = bookingRepository.save(booking);
 

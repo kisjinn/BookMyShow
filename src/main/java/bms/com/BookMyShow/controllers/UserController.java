@@ -5,7 +5,9 @@ import bms.com.BookMyShow.dtos.SignUpRequestDto;
 import bms.com.BookMyShow.dtos.SignUpResponseDto;
 import bms.com.BookMyShow.models.User;
 import bms.com.BookMyShow.services.UserServices;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class UserController {
     private UserServices userServices;
     public UserController(UserServices userServices){

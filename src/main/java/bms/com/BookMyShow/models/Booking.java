@@ -15,7 +15,7 @@ import java.util.List;
 public class Booking extends Base{
     //Ticket
     private BookingStatus bookingStatus;
-    @OneToMany
+    @OneToMany(mappedBy = "booking")
     private List<ShowSeat> showSeat;
     private int amount;
     @OneToMany(mappedBy = "booking")

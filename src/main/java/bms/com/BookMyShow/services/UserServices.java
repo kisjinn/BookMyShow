@@ -25,7 +25,7 @@ public class UserServices {
             //throw new UnsupportedOperationException("User is not registered");
             savedUser = SignIn(email, password);
         }
-        //create new user
+        //create new user and register it
         else {
             User user = new User();
             BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
@@ -41,6 +41,7 @@ public class UserServices {
         Optional<User> optionalUser = userRepository.findByEmail(email);
         BCryptPasswordEncoder bCryptPasswordEncoder= new BCryptPasswordEncoder();
         User user= optionalUser.get();
+        //password we are entering will get match with password stored in db (user.getPassWord())
         if(bCryptPasswordEncoder.matches(password, user.getPassWord())){
             System.out.println("Sign In Successfull");
         }

@@ -7,14 +7,16 @@ import java.util.List;
 
 @Setter
 @Getter
-@Entity (name = "show_seat")
+@Entity (name = "show_seats")
 public class ShowSeat extends Base{
     @ManyToOne
     private Show show;
     @ManyToOne
     private Seat seat;
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.ORDINAL) //enum values will be mapped with integres and that integer will use as a foreign key in this table
     private ShowSeatStatus showSeatStaus;
+    @ManyToOne
+    private Booking booking;
 }
 /*
     1         ---->      1
